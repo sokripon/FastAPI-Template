@@ -21,7 +21,7 @@ async def root(response: Response):
     return set_response_success(response, crud.get_time())
 
 
-@router_time.post("/add", response_model=TimeStamp, status_code=status.HTTP_201_CREATED)
+@router_time.post("/add", response_model=ResponseSuccess[TimeStamp], status_code=status.HTTP_201_CREATED)
 async def add_new_timestamp(time_stamp: TimeStampCreate, db: Session = Depends(DB.get_db)):
     return crud.create_time_stamp(db, time_stamp)
 
