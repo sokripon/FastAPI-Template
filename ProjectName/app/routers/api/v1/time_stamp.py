@@ -22,13 +22,19 @@ async def root(response: Response):
 
 
 @router_time.post("/add", response_model=ResponseSuccess[TimeStamp], status_code=status.HTTP_201_CREATED)
-async def add_new_timestamp(time_stamp: TimeStampCreate, db: Session = Depends(DB.get_db)):
-    return crud.create_time_stamp(db, time_stamp)
+async def add_new_timestamp(time_stamp: TimeStampCreate, response: Response, db: Session = Depends(DB.get_db)):
+    return set_response_success(response, crud.create_time_stamp(db, time_stamp))
 
 
 @router_time.get("/list", status_code=status.HTTP_200_OK, response_model=ResponseSuccess[List[TimeStampDB]])
 async def list_times(response: Response, db: Session = Depends(DB.get_db)):
     data = crud.get_all_time_stamp(db)
+    return set_response_success(response, data)
+
+
+@router_time.get("/count", status_code=status.HTTP_200_OK, response_model=ResponseSuccess[int])
+async def count_times(response: Response, db: Session = Depends(DB.get_db)):
+    data = crud.count_all_entries(db)
     return set_response_success(response, data)
 
 
