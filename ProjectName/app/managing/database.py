@@ -15,6 +15,7 @@ class Database:
     # https://github.com/tiangolo/fastapi/issues/1825
     # Tortoise ORM maybe? https://tortoise-orm.readthedocs.io/en/latest/examples/fastapi.html
     # ormar maybe? https://github.com/collerek/ormar
+    # pony maybe? https://docs.ponyorm.org/integration_with_fastapi.html
     # https://github.com/tortoise/orm-benchmarks
     engine: Engine
 
