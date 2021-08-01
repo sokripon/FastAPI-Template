@@ -6,13 +6,56 @@
     <link rel="stylesheet" type="text/css" href="static/css/water.css">
     <link rel="icon" type="image/jpg" href="static/favicon.ico"/>
 
+    <script type="text/javascript">
 
+        var ws = new WebSocket('ws://localhost:8762/ws');
+        ws.onmessage = function (ev) {
+            msg = ev.data;
+            document.getElementById('message').innerHTML = msg;
+            console.log(msg)
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        update()
+
+        function clicky() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/v1/time_stamp/add');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Accept', 'application/json');
+            var random = Math.random()
+            var data = `{"name": "Test-${random}"}`
+            xhr.send(data);
+            update()
+        }
+
+        function update() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    document.getElementById('counter').innerText = "Total db entries: " + JSON.parse(xhr.responseText).data;
+                }
+            }
+
+            xhr.open('GET', '/api/v1/time_stamp/count');
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.send();
+        }
+
+
+    </script>
 </head>
 <body>
 <h1>Why I'm here</h1>
-<img src="static/img/clock.png" , alt="clock">
+<img src="static/img/clock.png" alt="clock">
 <p>Time: {{ time }}</p>
-<p>Dbentries: {{ amount }}</p>
+<p id="counter">T</p>
+<p id="message">Default</p>
+<button type="button" id="add" onclick="clicky()">Add</button>
+
 
 </body>
 </html>
