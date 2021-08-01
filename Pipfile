@@ -18,6 +18,7 @@ email-validator = "*"
 mysql-connector-python = "*"
 websockets = {git = "https://github.com/aaugustin/websockets"}
 fastapi-utils = "*"
+gunicorn = "*"
 
 [dev-packages]
 
