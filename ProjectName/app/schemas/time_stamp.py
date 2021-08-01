@@ -2,7 +2,7 @@ import datetime
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 # Of course you would NOT use strings for that, this is just for example usage and I'm not creative
@@ -20,7 +20,7 @@ class TimeStampBase(BaseModel):
 
 
 class TimeStampCreate(TimeStampBase):
-    pass
+    time: datetime.datetime = Field(datetime.datetime.now(), description="Defaults to current time")
 
 
 class TimeStampUpdate(TimeStampBase):
