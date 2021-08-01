@@ -15,7 +15,7 @@ class CustomMiddleWare(BaseHTTPMiddleware):
         user_ip = request.client.host
         cf_ip = request.headers.get('cf-connecting-ip')
         if user_ip in ["127.0.0.1", "localhost", "0.0.0.0"] and cf_ip:
-            user_ip = request.headers.get('cf-connecting-ip')
+            user_ip = cf_ip
         log.info(
             f"->RID={idem}\tREQUEST={request.method.upper()}\tPATH={request.url.path}\tIP={user_ip}"
         )
