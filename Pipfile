@@ -7,7 +7,7 @@ name = "pypi"
 fastapi = "*"
 sqlalchemy = "*"
 sqlalchemy-utils = "*"
-uvicorn = "*"
+uvicorn = {extras = ["standard"], version = "*"}
 python-jose = {extras = ["cryptography"], version = "*"}
 aiofiles = "*"
 jinja2 = "*"
@@ -16,6 +16,7 @@ pydantic = "*"
 requests = "*"
 email-validator = "*"
 mysql-connector-python = "*"
+websockets = {git = "https://github.com/aaugustin/websockets"}
 
 [dev-packages]
 
