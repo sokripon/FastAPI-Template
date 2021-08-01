@@ -27,7 +27,7 @@ def shutdown():
 
 
 @app.on_event("startup")
-def kek():
+def startup_fun():
     log.info("Application startup complete.")
 
 
