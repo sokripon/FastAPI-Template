@@ -14,29 +14,29 @@ DB.Base.metadata.create_all(bind=DB.engine)
 
 app = FastAPI(title=settings.general.project_name, description="Template for an not so good api",
               contact={"name": "sokripon", "email": "sokripon@gmail.com"})
-
 app.mount("/static", StaticFiles(directory=Path(__file__).parent.__str__() + "/static"), name="static")
 
 
 @app.on_event("shutdown")
 def shutdown():
-    pass
+    print("EHE")
 
 
-from ws import ConnectionManager
+from ProjectName.app.ws import ConnectionManager
 
 
 @app.on_event("startup")
 @repeat_every(seconds=5)
 async def remove_expired_tokens_task() -> None:
-    await ConnectionManager.manager.broadcast("lol")
+    await ConnectionManager.manager.broadcast("ehe")
 
 
-from ws import *  # Idk why but yes
+if __name__ == "main":
+    from ProjectName.app.ws import *  # Idk why but yes
 
-app.add_middleware(CustomMiddleWare)
-app.include_router(router=page_routers)
-app.include_router(router=api_routers)
+    app.add_middleware(CustomMiddleWare)
+    app.include_router(router=page_routers)
+    app.include_router(router=api_routers)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=settings.general.reload)
