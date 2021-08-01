@@ -11,6 +11,10 @@ from ProjectName.app.managing.configs import settings
 class Database:
     # Todo: Make it compatible with multiple databases at once
     # https://github.com/tiangolo/fastapi/issues/2592#issuecomment-773208039
+    # https://fastapi.tiangolo.com/advanced/async-sql-databases/ for higher performance
+    # https://github.com/tiangolo/fastapi/issues/1825
+    # Tortoise ORM maybe? https://tortoise-orm.readthedocs.io/en/latest/examples/fastapi.html
+    # ormar maybe? https://github.com/collerek/ormar
     engine: Engine
 
     SessionLocal: sessionmaker
