@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import uvicorn
@@ -40,4 +41,5 @@ if __name__ == "main":
     app.include_router(router=api_routers)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=settings.general.reload)
+    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=settings.general.reload,
+                log_level=logging.WARNING)
