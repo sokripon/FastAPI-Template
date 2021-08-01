@@ -32,6 +32,7 @@ async def remove_expired_tokens_task() -> None:
 
 
 if __name__ == "main":
+    # uvicorn command will not work with this
     from ProjectName.app.ws import *  # Idk why but yes
 
     app.add_middleware(CustomMiddleWare)
