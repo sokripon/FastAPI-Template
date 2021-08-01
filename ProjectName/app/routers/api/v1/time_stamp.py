@@ -1,10 +1,11 @@
+from datetime import datetime
 from pathlib import Path
 from typing import List
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from starlette import status
-from starlette.responses import PlainTextResponse, Response
+from starlette.responses import Response
 
 import ProjectName.app.crud.v1.time_stamps as crud
 from ProjectName.app.managing.database import DB
@@ -15,9 +16,9 @@ from ProjectName.app.schemas.time_stamp import TimeStamp, TimeStampCreate, TimeS
 router_time = APIRouter(prefix=f"/{Path(__file__).stem}", tags=[Path(__file__).stem, "Other cool tag"])
 
 
-@router_time.get("/")
-async def root():
-    return PlainTextResponse(content=crud.get_time(), status_code=status.HTTP_200_OK)
+@router_time.get("/", status_code=status.HTTP_200_OK, response_model=ResponseSuccess[datetime])
+async def root(response: Response):
+    return set_response_success(response, crud.get_time())
 
 
 @router_time.post("/add", response_model=TimeStamp, status_code=status.HTTP_201_CREATED)
