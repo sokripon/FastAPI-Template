@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+sqlalchemy = "*"
+sqlalchemy-utils = "*"
+uvicorn = "*"
+python-jose = {extras = ["cryptography"], version = "*"}
+aiofiles = "*"
+jinja2 = "*"
+toml = "*"
+pydantic = "*"
+requests = "*"
+email-validator = "*"
+mysql-connector-python = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

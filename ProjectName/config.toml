@@ -1,0 +1,14 @@
+[general]
+project_name = "ProjectName"
+mode = "dev"
+hostname = "127.0.0.1"
+port = 8762
+reload = true
+database = true
+
+[database]
+dbms = "sqlite"
+host = ""
+name = "times.db"
+username = ""
+password = ""
