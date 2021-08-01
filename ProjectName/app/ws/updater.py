@@ -25,3 +25,5 @@ async def websocket_endpoint_time(websocket: WebSocket):
     except exceptions.ConnectionClosedError:
         manager.disconnect(websocket)
         await manager.broadcast(f"Client #{client_id} was forcefully closed")
+    except exceptions.ConnectionClosedOK:
+        manager.disconnect(websocket)
