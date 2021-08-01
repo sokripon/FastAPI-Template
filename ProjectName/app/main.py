@@ -31,7 +31,9 @@ from ws import ConnectionManager
 async def remove_expired_tokens_task() -> None:
     await ConnectionManager.manager.broadcast("lol")
 
-from ws import * # Idk why but yes
+
+from ws import *  # Idk why but yes
+
 app.add_middleware(CustomMiddleWare)
 app.include_router(router=page_routers)
 app.include_router(router=api_routers)
