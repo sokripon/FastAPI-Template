@@ -8,6 +8,7 @@ from websockets import exceptions
 
 from ProjectName.app.main import app
 
+
 @app.websocket("/ws")
 async def websocket_endpoint_time(websocket: WebSocket):
     from .ConnectionManager import manager
