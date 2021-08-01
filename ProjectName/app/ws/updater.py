@@ -1,5 +1,4 @@
 import asyncio
-import random
 from datetime import datetime
 
 from fastapi import WebSocket
@@ -12,7 +11,7 @@ from ProjectName.app.main import app
 @app.websocket("/ws")
 async def websocket_endpoint_time(websocket: WebSocket):
     from .ConnectionManager import manager
-    client_id = random.randint(0, 1000)
+    client_id = id(websocket).__int__()
     await manager.connect(websocket)
     try:
         await manager.send_personal_message(f"You joined the time update chat", websocket)
