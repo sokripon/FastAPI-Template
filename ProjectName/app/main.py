@@ -2,6 +2,7 @@ from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi_utils.tasks import repeat_every
 from starlette.staticfiles import StaticFiles
 
 from ProjectName.app.managing.configs import settings
@@ -21,6 +22,17 @@ app.mount("/static", StaticFiles(directory=Path(__file__).parent.__str__() + "/s
 def shutdown():
     pass
 
+
+from ws import ConnectionManager
+
+
+@app.on_event("startup")
+@repeat_every(seconds=5)
+async def remove_expired_tokens_task() -> None:
+    await ConnectionManager.manager.broadcast("lol")
+
+
+from ws import *  # Idk why but yes
 
 app.add_middleware(CustomMiddleWare)
 app.include_router(router=page_routers)

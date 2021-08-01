@@ -131,3 +131,4 @@ dmypy.json
 *.db
 
 .idea/
+/testing_scripts/
