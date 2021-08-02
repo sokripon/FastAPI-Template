@@ -26,7 +26,7 @@ async def add_new_timestamp(time_stamp: TimeStampCreate, response: Response, db:
     return set_response_success(response, crud.create_time_stamp(db, time_stamp))
 
 
-@router_time.get("/list", status_code=status.HTTP_200_OK, response_model=ResponseSuccess[List[TimeStampDB]])
+@router_time.get("/list", status_code=status.HTTP_200_OK, response_model=ResponseSuccess[List[TimeStamp]])
 async def list_times(response: Response, db: Session = Depends(DB.get_db)):
     data = crud.get_all_time_stamp(db)
     return set_response_success(response, data)
