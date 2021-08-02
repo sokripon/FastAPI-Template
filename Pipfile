@@ -16,9 +16,11 @@ pydantic = "*"
 requests = "*"
 email-validator = "*"
 mysql-connector-python = "*"
-websockets = {git = "https://github.com/aaugustin/websockets"}
+websockets = { git = "https://github.com/aaugustin/websockets" }
 fastapi-utils = "*"
 gunicorn = "*"
+aiosqlite = "*"
+aiomysql = "*"
 
 [dev-packages]
 

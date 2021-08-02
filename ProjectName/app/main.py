@@ -14,7 +14,6 @@ from ProjectName.app.routers import page_routers, api_routers
 
 log = logging.getLogger("uvicorn")
 log.info(f"Uvicorn running on http://{settings.general.hostname}:{settings.general.port}")
-DB.Base.metadata.create_all(bind=DB.engine)
 
 app = FastAPI(title=settings.general.project_name, description="Template for an not so good api",
               contact={"name": "sokripon", "email": "sokripon@gmail.com"})
@@ -27,7 +26,10 @@ def shutdown():
 
 
 @app.on_event("startup")
-def startup_fun():
+async def startup_fun():
+    async with DB.async_engine.begin() as conn:
+        # await conn.run_sync(DB.Base.metadata.drop_all)
+        await conn.run_sync(DB.Base.metadata.create_all)
     log.info("Application startup complete.")
 
 
@@ -43,7 +45,6 @@ async def remove_expired_tokens_task() -> None:
 if __name__ == "main":
     # uvicorn command will not work with this
     from ProjectName.app.ws import *  # Idk why but yes
-
     app.add_middleware(CustomMiddleWare)
     app.include_router(router=page_routers)
     app.include_router(router=api_routers)
