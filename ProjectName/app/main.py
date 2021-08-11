@@ -1,7 +1,9 @@
-import logging
 import os
-from pathlib import Path
+import sys
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '../../'))
+from pathlib import Path
+import logging
 import uvicorn
 from fastapi import FastAPI
 from fastapi_utils.tasks import repeat_every
