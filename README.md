@@ -1,6 +1,5 @@
 # FastAPI-Template/Example
 
-- - - -
 This example does __NOT__ use async for crud
 
 This is not really finished or good and shouldn't be used by anyone that wants a finished template.
