@@ -41,4 +41,5 @@ pipenv run python ./ProjectName/app/main.py
 - [ ] Add custom error pages
 - [ ] Make it a [cookiecutter](https://cookiecutter.readthedocs.io) template
 - [ ] Add more type hinting
-- [ ] Add proper logging functions 
+- [ ] Add proper logging functions
+- [ ] Maybe don't use upper module name so adding to path is not needed?
