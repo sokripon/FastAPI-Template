@@ -11,7 +11,10 @@ from ProjectName.app.managing.configs import settings
 from ProjectName.app.managing.database import DB
 from ProjectName.app.middlewares.example import CustomMiddleWare
 from ProjectName.app.routers import page_routers, api_routers
+from ProjectName.app.ws import ConnectionManager
+from ProjectName.app.ws import ws_routers
 
+DB.create_myself()
 log = logging.getLogger("uvicorn")
 log.info(f"Uvicorn running on http://{settings.general.hostname}:{settings.general.port}")
 
@@ -27,13 +30,7 @@ def shutdown():
 
 @app.on_event("startup")
 async def startup_fun():
-    async with DB.async_engine.begin() as conn:
-        # await conn.run_sync(DB.Base.metadata.drop_all)
-        await conn.run_sync(DB.Base.metadata.create_all)
     log.info("Application startup complete.")
-
-
-from ProjectName.app.ws import ConnectionManager
 
 
 @app.on_event("startup")
@@ -42,13 +39,11 @@ async def remove_expired_tokens_task() -> None:
     await ConnectionManager.manager.broadcast("ehe")
 
 
-if __name__ == "main":
-    # uvicorn command will not work with this
-    from ProjectName.app.ws import *  # Idk why but yes
-    app.add_middleware(CustomMiddleWare)
-    app.include_router(router=page_routers)
-    app.include_router(router=api_routers)
-    log.info(f"Started server process [{os.getpid()}]")
+app.add_middleware(CustomMiddleWare)
+app.include_router(router=page_routers)
+app.include_router(router=api_routers)
+app.include_router(router=ws_routers)
+log.info(f"Started server process [{os.getpid()}]")
 if __name__ == "__main__":
-    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=settings.general.reload,
-                log_level=logging.WARNING, workers=2, use_colors=True)
+    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=True,
+                log_level=logging.WARNING, workers=1, use_colors=True)

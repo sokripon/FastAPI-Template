@@ -5,10 +5,10 @@ from fastapi import WebSocket
 from starlette.websockets import WebSocketDisconnect
 from websockets import exceptions
 
-from ProjectName.app.main import app
+from ProjectName.app.ws import ws_routers
 
 
-@app.websocket("/ws")
+@ws_routers.websocket("/ws")
 async def websocket_endpoint_time(websocket: WebSocket):
     from .ConnectionManager import manager
     client_id = id(websocket).__int__()
