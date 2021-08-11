@@ -47,5 +47,5 @@ app.include_router(router=api_routers)
 app.include_router(router=ws_routers)
 log.info(f"Started server process [{os.getpid()}]")
 if __name__ == "__main__":
-    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=True,
-                log_level=logging.WARNING, workers=1, use_colors=True)
+    uvicorn.run("main:app", host=settings.general.hostname, port=settings.general.port, reload=settings.general.reload,
+                log_level=logging.WARNING, workers=1, use_colors=True, reload_dirs=f"{Path(__file__).parent.__str__()}")
