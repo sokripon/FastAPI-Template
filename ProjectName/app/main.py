@@ -37,7 +37,7 @@ async def startup_fun():
 
 @app.on_event("startup")
 @repeat_every(seconds=5)
-async def remove_expired_tokens_task() -> None:
+async def ehe_te_nandayo_task() -> None:
     await ConnectionManager.manager.broadcast("ehe")
 
 
