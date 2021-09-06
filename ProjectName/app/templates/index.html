@@ -8,7 +8,7 @@
 
     <script type="text/javascript">
 
-        var ws = new WebSocket('ws://localhost:8762/ws');
+        var ws = new WebSocket('ws://{{ websocket }}/ws');
         ws.onmessage = function (ev) {
             msg = ev.data;
             document.getElementById('message').innerHTML = msg;
