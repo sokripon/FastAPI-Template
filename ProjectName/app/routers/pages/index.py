@@ -14,11 +14,12 @@ homepage_root = APIRouter()
 
 @homepage_root.get("/")
 async def hello_world(request: Request, db: Session = Depends(DB.get_db)):
-    if request.get("headers") and request.get("headers").get("host") and request.get("headers").get(
-            "host") != settings.general.hostname:
-        we = request.get("headers").get("host")
-    else:
-        we = f"{settings.general.hostname}:{settings.general.port}"
+    we = f"{settings.general.hostname}:{settings.general.port}"
+    try:
+        if (headers := dict(request._headers)) and headers.get("host") and headers != settings.general.hostname:
+            we = headers
+    except Exception as e:
+        print("Something went horrible wrong with the headers", e)
     return templates.TemplateResponse("index.html",
                                       {"request": request, "time": datetime.now(), "amount": count_all_entries(db),
                                        "websocket": we})
