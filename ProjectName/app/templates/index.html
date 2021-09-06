@@ -7,8 +7,15 @@
     <link rel="icon" type="image/jpg" href="static/favicon.ico"/>
 
     <script type="text/javascript">
+        var httpProtocol = 'http://';
+        var wsProtocol = 'ws://';
+        if (window.location.protocol === 'https:') {
+            httpProtocol = 'http://';
+            wsProtocol = 'wss://';
+        }
 
-        var ws = new WebSocket('ws://{{ websocket }}/ws');
+
+        var ws = new WebSocket(`${wsProtocol}{{ websocket }}/ws`);
         ws.onmessage = function (ev) {
             msg = ev.data;
             document.getElementById('message').innerHTML = msg;
