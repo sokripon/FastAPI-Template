@@ -17,7 +17,7 @@ async def hello_world(request: Request, db: Session = Depends(DB.get_db)):
     we = f"{settings.general.hostname}:{settings.general.port}"
     try:
         if (headers := dict(request._headers)) and headers.get("host") and headers != settings.general.hostname:
-            we = headers
+            we = headers.get("host")
     except Exception as e:
         print("Something went horrible wrong with the headers", e)
     return templates.TemplateResponse("index.html",
