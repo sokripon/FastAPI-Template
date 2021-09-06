@@ -14,8 +14,9 @@ homepage_root = APIRouter()
 
 @homepage_root.get("/")
 async def hello_world(request: Request, db: Session = Depends(DB.get_db)):
-    if request.get("headers") and request.get("headers") != settings.general.hostname:
-        we = request.get("headers")
+    if request.get("headers") and request.get("headers").get("host") and request.get("headers").get(
+            "host") != settings.general.hostname:
+        we = request.get("headers").get("host")
     else:
         we = f"{settings.general.hostname}:{settings.general.port}"
     return templates.TemplateResponse("index.html",
