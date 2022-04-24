@@ -1,8 +1,9 @@
 import dataclasses
 import os
+import typing
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Union
+from typing import Union, Optional
 
 from dotenv import dotenv_values
 
@@ -18,6 +19,9 @@ class Setting:
     app_host: str = "127.0.0.1"
     app_port: int = 5000
     database_url: str = ""
+    redoc_url: Optional[str] = "/redoc"
+    docs_url: Optional[str] = "/docs"
+    openapi_url: Optional[str] = "/openapi.json"
 
     def __post_init__(self):
 
@@ -33,10 +37,12 @@ class Setting:
                 elif field.type is acceptable_number and value is not None:
                     value = int(value)
                 setattr(self, field.name, value)
+            if field.type is typing.Optional[str] and value == "" or value == "None":
+                setattr(self, field.name, None)
 
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 project_path = Path(current_path).parent
 dotenv_con = dotenv_values(project_path.joinpath(".env"))
 templates = Jinja2Templates(directory=project_path / "templates")
-setting = Setting(**dotenv_con)
+setting: Setting = Setting(**dotenv_con)
