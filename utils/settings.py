@@ -19,6 +19,8 @@ class Setting:
     app_host: str = "127.0.0.1"
     app_port: int = 5000
     database_url: str = ""
+    root_path: Optional[str] = None
+    debug: bool = False
     redoc_url: Optional[str] = "/redoc"
     docs_url: Optional[str] = "/docs"
     rapidoc_url: Optional[str] = "/rapidoc"
