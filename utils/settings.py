@@ -21,6 +21,7 @@ class Setting:
     database_url: str = ""
     redoc_url: Optional[str] = "/redoc"
     docs_url: Optional[str] = "/docs"
+    rapidoc_url: Optional[str] = "/rapidoc"
     openapi_url: Optional[str] = "/openapi.json"
 
     def __post_init__(self):

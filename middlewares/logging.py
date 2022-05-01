@@ -5,7 +5,9 @@ import time
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 
+from utils import rapidoc
 from utils.logging import logger
+from utils.settings import setting
 
 
 class LoggingMiddleWare(BaseHTTPMiddleware):
@@ -18,7 +20,10 @@ class LoggingMiddleWare(BaseHTTPMiddleware):
         reqlogger = logger.bind(request_id=idem)
         request.state.logger = reqlogger
         start_time = time.time()
-        response = await call_next(request)
+        if setting.rapidoc_url and request.url.path.startswith(setting.rapidoc_url):
+            response = rapidoc.get_html(request)
+        else:
+            response = await call_next(request)
 
         process_time = (time.time() - start_time) * 1000
         formatted_process_time = '{0:.2f}'.format(process_time)
