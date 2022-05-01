@@ -41,5 +41,15 @@ class Database:
     def create_myself(self):
         self.Base.metadata.create_all(bind=self.engine)
 
+    class DBContextManager:
+        def __init__(self, db):
+            self.db = db
+
+        def __enter__(self):
+            return self.db
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            self.db.close()
+
 
 DB = Database(setting.database_url)
