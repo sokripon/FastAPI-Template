@@ -12,6 +12,7 @@ sqlalchemy = "*"
 alembic = "*"
 fastapi-utils = "*"
 jinja2 = "*"
+pydantic = "*"
 
 [dev-packages]
 
