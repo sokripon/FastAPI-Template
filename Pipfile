@@ -7,12 +7,12 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 loguru = "*"
-celery = "*"
 sqlalchemy = "*"
 alembic = "*"
 fastapi-utils = "*"
 jinja2 = "*"
 pydantic = "*"
+anyio = "*"
 
 [dev-packages]
 
