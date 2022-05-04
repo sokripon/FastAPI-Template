@@ -22,7 +22,7 @@ class CustomLogger:
             handlers=[{"sink": sys.stdout, "level": logging.DEBUG, "format": self.format_record}]
         )
 
-        logger.add("logs/log_{time}.log", rotation="1 days", backtrace=True, diagnose=True)
+        logger.add("logs/log_{time}.log", rotation="1 days", backtrace=True, diagnose=True, compression="zip")
 
 
     @staticmethod
