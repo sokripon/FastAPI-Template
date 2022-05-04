@@ -36,7 +36,7 @@ class Setting:
                 elif field.type is int and value is not None:
                     value = int(value)
                 elif field.type is bool and value is not None:
-                    value = bool(value)
+                    value = True if value.lower() == "true" else False
                 elif field.type is acceptable_number and value is not None:
                     value = int(value)
                 setattr(self, field.name, value)
